@@ -11,13 +11,42 @@ class PostControllers {
     }
   }
 
-  async getAll(req, res) {}
+  async getAll(req, res) {
+    try {
+      const posts = await PostSchema.find();
+      return res.json(posts);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
 
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        res.status(400).json({ message: "id is not specified" });
+      }
+      const singlePost = PostSchema.findById(id);
+      return res.json(singlePost);
+    } catch (e) {
+      console.log(e);
+      res.status(500).json(e);
+    }
+  }
 
-  async update(req, res) {}
+  async update(req, res) {
+    try {
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
 
-  async delete(req, res) {}
+  async delete(req, res) {
+    try {
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
 }
 
 export default new PostControllers();
